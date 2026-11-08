@@ -1,0 +1,47 @@
+{
+  "name": "vetc-bienlai-downloader",
+  "version": "1.0.0",
+  "description": "VETC Bulk Invoice PDF Downloader",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "keywords": [],
+  "homepage": "https://github.com/letieu",
+  "author": "letieu <letieu8@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^31.0.0",
+    "electron-builder": "^24.13.3"
+  },
+  "build": {
+    "appId": "com.vetc.bienlai.downloader",
+    "productName": "VETC Downloader",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "index.html",
+      "index.css",
+      "renderer.js",
+      "package.json"
+    ],
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "category": "Utility"
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "portable"
+      ]
+    }
+  }
+}

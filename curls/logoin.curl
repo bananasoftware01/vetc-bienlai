@@ -1,0 +1,36 @@
+curl 'https://auth.vetc.com.vn/realms/tasid/login-actions/authenticate?session_code=M0D5KZS3zLx7OIbyN8hC0YT8RryE11j_k1LT5MCE0KY&execution=a40c73fa-3779-4899-ba0c-1475d566c2c5&client_id=customer-portal&tab_id=iqxUWCKtSiw&client_data=eyJydSI6Imh0dHBzOi8vY3VzdG9tZXIudmV0Yy5jb20udm4vQWNjb3VudC9Mb2dpbj9SZXR1cm5Vcmw9L0FjY291bnQvTG9ja291dCIsInJ0IjoiY29kZSJ9' \
+  -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7' \
+  -H 'Accept-Language: en-US,en;q=0.9,vi;q=0.8' \
+  -H 'Cache-Control: no-cache' \
+  -H 'Connection: keep-alive' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -b 'AUTH_SESSION_ID=MGZkMjBmYWMtMDJjYy00ODU4LWFiYjQtNDBlYmM0N2U0OGIzLmpwbWhPZDlYN0ZMMURBc1g3eW5QR2ltSlp1aW0wTEtQOWVpdzRSTnl5cDBtOWRSc3h0X3NuUFNFczZySENPaGVNQm9iYTZwUHFMZ3Y4cU5tcTdUYzJR.prod-ewallet-khdn-keycloak-02-12180; KC_RESTART=eyJhbGciOiJkaXIiLCJlbmMiOiJBMTI4Q0JDLUhTMjU2In0..sTATpYuYhAHgIm_VFx1NPw.F_bLVWwXBdmWMy2sogNpc85izMYsYfkXviN9kvaThd4ctEEzzpoBg0s4oHgz22YhUwt3vpKkE0nSPAxvS8Y6HhHa6OxlaeHuIbLkUXIrAqY6h14KQmJu64PrYPImsuiAKBiB52wj7uKydI5WXHFUZ6rLrzrATxAiOoQe_EddytnM9qEbhHrs52hKbUdDBCRXrEt6LEUnN8qvuPc13J-WEHlYgHD8sgVgR6hncbGF4ayQ2JJyzjyj0DIem4UAA1no9mckBLmQ7lLXNPivXyatePL11jat2Mmbx3bB00Pu7GYxQ1aId4ckGHSfB0yBNSp72MG4kSXEZ34tiVoi5reQd3dIdu3zlh4XcBSKYW2AFLGpvRn7zYhlLz5HUzciYI9Wmc0OmBxMIfzrZhf4TK2CCrTiR9QBHMrNt38X_dlc8vzwoX1xGMz6rOM8x4qup68TSQwSbIaat4gNL3pAHFVGCDxdPoFvEFcaPS-uRmcRCX5K2vFMQvDRENtF5qKYwnS9AOyRjT-XyU4mmQ2_mGX3HdlK68UiW_kkKLcnDHnnVyesBNZMY_A8qrBLa8D_bCZdrC8-B55GlXGZ8L6kove27LI8AdExTiMDJs8O-zWEO-Eck_OId6k8ytPzWEG1yON-Nz_q4gF-Go9-2M7QBLHLV65JpMXHgKnDzmxK57u8qHPfOPN6EVXaVgv4f07m9YcCOy2ddZoWkIfIjC9sS05YmdS2esYNri07Asoo-KaYzsNCNsrcZ9HDagcUmS0LqxBeafC_BOnyZ8dmt1MoNL690DDmIyuzoKFDxbCel8phPsj9YZQRMQsvtaVOvbDaPRoR1dpeVlom_tgwfXbG5EJsDQ.VxuvhEm0r0YLaVw-YF9UrA; TS01d48eeb=01d9520817cd366d6f3da5b78eb7032b654d7cee4f8852395a3896956fa51635957afa588835b46902f42127b912b13a482007d49ff895fea0cdaa5df275bdc939b5f1555c5a6051a9c2fa94634afe60405981bf4fe53abf0b55688a4af289d5963d152a1940a00f2c2be3a1c55d37a149bc4b730b3c1cf1d037b079a125e15a5be34a3e0c; _gcl_au=1.1.433171772.1784130207; _ga=GA1.1.2074650153.1784130208; _fbp=fb.2.1784130207896.681800936933363756; VETC_DEVICE_ID=1ca50b04-ecd4-4620-a54d-89ed5c6c67c7; _ga_GZFFX2NK7P=GS2.1.s1784130207$o1$g1$t1784130570$j60$l0$h0; TS01d2cc06=01d9520817642d53278905beb42a8301887ce4cd55617338973b97e143d2c97e8f36e3d0136a6d2ada6e1a43852fe56d6afa44718a1ee7058115392348a4faf97c1f4b8a82' \
+  -H 'Origin: null' \
+  -H 'Pragma: no-cache' \
+  -H 'Sec-Fetch-Dest: document' \
+  -H 'Sec-Fetch-Mode: navigate' \
+  -H 'Sec-Fetch-Site: same-origin' \
+  -H 'Sec-Fetch-User: ?1' \
+  -H 'Upgrade-Insecure-Requests: 1' \
+  -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36' \
+  -H 'sec-ch-ua: "Google Chrome";v="149", "Chromium";v="149", "Not)A;Brand";v="24"' \
+  -H 'sec-ch-ua-mobile: ?0' \
+  -H 'sec-ch-ua-platform: "Linux"' \
+  --data-raw 'username=E0101164461&password=Nhamca0%40&credentialId='
+
+curl 'https://customer.vetc.com.vn/Account/Login?ReturnUrl=/Account/Lockout&session_state=0fd20fac-02cc-4858-abb4-40ebc47e48b3&iss=https%3A%2F%2Fauth.vetc.com.vn%2Frealms%2Ftasid&code=f8f23c40-df20-43bb-9148-20d0ec810ccc.0fd20fac-02cc-4858-abb4-40ebc47e48b3.98f9a354-38a3-4d14-805c-5e4070828f87' \
+  -H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7' \
+  -H 'Accept-Language: en-US,en;q=0.9,vi;q=0.8' \
+  -H 'Cache-Control: no-cache' \
+  -H 'Connection: keep-alive' \
+  -b '_gcl_au=1.1.433171772.1784130207; _ga=GA1.1.2074650153.1784130208; _fbp=fb.2.1784130207896.681800936933363756; ASP.NET_SessionId=ghbsrmor1nyefmvl1ipjbijq; __RequestVerificationToken=qUQV0PO7jOn0l6E-GigC0naHaPXvBBJyLbQjycz8vTz7YeB47A_x9cjVAIAtJxmpMxKi-86VTlb2Os6DhpLHWeSZ_wA1; _ga_GZFFX2NK7P=GS2.1.s1784130207$o1$g1$t1784130570$j60$l0$h0; .AspNet.ApplicationCookie_CUSTOMER=werYPdJsl7GtHO9UDvqTj4oT4o0F8VUaa77skQd65Q0OJOPsi1seEJHZvcEiWXgxKF7UwXRT-vB7R39fsxaMmCDqj0z8hb05iiXVfZX9awqBK4MOgUdzvlqd9T_HalUUz5ws6B9g0xVdANjXPwkGZpo7iqr4NVWfRh3vz36EISKkfd36OGsfBllOEH_n6hkL1jUYQY0CxGwZ3EnmLuKRdHYUmoQL-Y9li_wKLT7zAuCXMmxgD8WfXy9huUlCXBz4BrKjTziUPMEpthtcdw31XbU6-20zvYlu802iF-BnwKSgak83LXp2Nh0vkMtAL_PgvOmkz6r_hjwrdoMom8qw-H0P0j01OJxySD4CEAxhwpL4Q8-61SBTypGg9XF79TRJwo0FHZOcHGNSi2Sc-m8wPIsSbsrnKdh2nx53sKCXCQ9S1bj2e-NBz0IUjrktAW9ptOZxiu4zBFqBVajooxbUambqMnyMIBmRcdNbcaottEDUj3xbiQqk561P1LB14y5z7HmHxd0woHrpz8zQEJubNBimNAYb6JvGYnlQeXZ3BYdUsfLl; TS01deb0ee=01d9520817fc27999d36e7c28e4b4cc3a2eac9b7999e26bbdaee98781e6c8a6c5066901783d3cbaa9d5f4d6acc7f5e6df4b4bfbea68e57e0fdc67cc250034b8bec5bbf927344301c0e0b5439e882b999fbf53d53bc7b315ac68f10b998c0636802e9cb882256e2326d0b55ac8960892b7c9f07e0e1' \
+  -H 'Pragma: no-cache' \
+  -H 'Sec-Fetch-Dest: document' \
+  -H 'Sec-Fetch-Mode: navigate' \
+  -H 'Sec-Fetch-Site: same-site' \
+  -H 'Sec-Fetch-User: ?1' \
+  -H 'Upgrade-Insecure-Requests: 1' \
+  -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36' \
+  -H 'sec-ch-ua: "Google Chrome";v="149", "Chromium";v="149", "Not)A;Brand";v="24"' \
+  -H 'sec-ch-ua-mobile: ?0' \
+  -H 'sec-ch-ua-platform: "Linux"'

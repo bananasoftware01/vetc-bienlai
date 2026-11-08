@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VETC Bulk PDF Invoice Downloader</title>
+  <link rel="stylesheet" href="index.css">
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app-container">
+    
+    <!-- MAIN HEADER -->
+    <header class="app-header">
+      <div class="brand">
+        <div class="brand-logo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="icon-logo">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+            <polyline points="7 10 12 15 17 10" />
+            <line x1="12" y1="15" x2="12" y2="3" />
+          </svg>
+        </div>
+        <div class="brand-info">
+          <h1>VETC Invoice Downloader</h1>
+          <span class="brand-subtitle">Công cụ tải hóa đơn VETC tự động</span>
+        </div>
+      </div>
+      <div class="user-status" id="userStatusBlock" style="display: none;">
+        <span class="user-badge">
+          <span class="status-dot green"></span>
+          <span id="loggedInUser">Đang kết nối</span>
+        </span>
+        <button id="btnSignOut" class="btn btn-outline-sm">Đăng xuất</button>
+      </div>
+    </header>
+
+    <!-- CONTENT WRAPPER -->
+    <main class="app-content">
+
+      <!-- SECTION 1: LOGIN -->
+      <section id="secLogin" class="app-card login-card active">
+        <div class="card-header text-center">
+          <div style="margin-bottom: 20px; display: inline-block;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="width: 64px; height: 64px; color: var(--primary); filter: drop-shadow(0 0 10px var(--primary-glow));">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              <path d="M9 11l2 2 4-4"/>
+            </svg>
+          </div>
+          <h2>Đăng nhập Hệ thống</h2>
+          <p style="font-size: 0.9rem; line-height: 1.5; max-width: 360px; margin: 0 auto 24px;">Ứng dụng sẽ mở cửa sổ trình duyệt an toàn của VETC để bạn đăng nhập. Hệ thống sẽ tự động bắt đầu sau khi đăng nhập thành công.</p>
+        </div>
+        
+        <div id="loginErrorBlock" class="error-alert" style="display: none;">
+          <svg class="alert-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <span id="loginErrorMsg">Đã xảy ra lỗi đăng nhập.</span>
+        </div>
+
+        <div class="action-buttons vertical">
+          <button type="button" id="btnLoginInteractive" class="btn btn-primary btn-block btn-lg" style="font-size: 1rem; padding: 16px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon" id="btnBrowserIcon"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            <span id="btnBrowserText">Đăng nhập qua Trình duyệt</span>
+            <div class="spinner" id="btnBrowserSpinner" style="display: none;"></div>
+          </button>
+        </div>
+        
+        <div class="card-footer" style="margin-top: 24px; text-align: center;">
+          <p class="text-muted"><small>Bảo mật: Ứng dụng không lưu trữ tài khoản hay mật khẩu của bạn.</small></p>
+        </div>
+      </section>
+
+      <!-- SECTION 2: DASHBOARD (SEARCH & DIRECTORY) -->
+      <section id="secDashboard" class="app-card dashboard-card" style="display: none;">
+        
+        <!-- STEP 1: CONFIGURE PATH & FILTERS -->
+        <div class="dashboard-controls">
+          <div class="control-row">
+            <!-- TARGET FOLDER PICKER -->
+            <div class="control-box folder-box">
+              <label>Thư mục lưu file PDF</label>
+              <div class="folder-picker-group">
+                <input type="text" id="txtTargetFolder" readonly placeholder="Chọn thư mục lưu trữ file hóa đơn PDF..." required>
+                <button type="button" id="btnSelectFolder" class="btn btn-secondary">Chọn thư mục...</button>
+              </div>
+            </div>
+          </div>
+          
+          <div class="control-row col-3">
+            <!-- DATE RANGE -->
+            <div class="control-box">
+              <label for="txtFromDate">Từ ngày</label>
+              <input type="date" id="txtFromDate" required>
+            </div>
+            <div class="control-box">
+              <label for="txtToDate">Đến ngày</label>
+              <input type="date" id="txtToDate" required>
+            </div>
+            <div class="control-box action-align-end">
+              <button type="button" id="btnSearch" class="btn btn-primary btn-block">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                Tìm kiếm hóa đơn
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- SEARCH STATUS OR LOADER -->
+        <div id="searchLoader" class="search-loader" style="display: none;">
+          <div class="spinner large"></div>
+          <p>Đang tìm kiếm hóa đơn trên hệ thống VETC, vui lòng đợi...</p>
+        </div>
+
+        <!-- RESULTS OVERVIEW & TABLE -->
+        <div id="searchResultsArea" class="results-area" style="display: none;">
+          <div class="results-summary">
+            <div class="summary-stats">
+              <div class="stat-card">
+                <span class="stat-label">Tổng hóa đơn</span>
+                <span class="stat-value" id="lblTotalCount">0</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-label">Tổng số tiền</span>
+                <span class="stat-value text-teal" id="lblTotalAmount">0 VND</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-label">Hóa đơn đã chọn</span>
+                <span class="stat-value text-blue" id="lblSelectedCount">0</span>
+              </div>
+            </div>
+            <div class="summary-actions" style="display: flex; gap: 12px; align-items: center;">
+              <div class="control-box" style="gap: 2px;">
+                <label for="selConcurrency" style="font-size: 0.725rem; color: var(--text-muted); font-weight: 600;">Số luồng tải</label>
+                <select id="selConcurrency" style="background: #ffffff; border: 1px solid #cbd5e1; border-radius: 6px; padding: 8px 12px; font-family: var(--font-family); font-size: 0.825rem; font-weight: 600; color: var(--text-main); cursor: pointer; outline: none; width: 150px; transition: var(--transition-smooth);">
+                  <option value="1">1 luồng (An toàn)</option>
+                  <option value="2">2 luồng</option>
+                  <option value="3" selected>3 luồng (Nhanh)</option>
+                  <option value="5">5 luồng (Rất nhanh)</option>
+                </select>
+              </div>
+              <button type="button" id="btnStartDownload" class="btn btn-success btn-lg">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="btn-icon"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Bắt đầu tải PDF
+              </button>
+            </div>
+          </div>
+
+          <div class="table-card">
+            <div class="table-header">
+              <h3>Danh sách Hóa đơn</h3>
+              <div class="table-filters">
+                <button type="button" id="btnSelectAll" class="btn btn-outline-sm">Chọn tất cả</button>
+                <button type="button" id="btnDeselectAll" class="btn btn-outline-sm">Bỏ chọn tất cả</button>
+              </div>
+            </div>
+            <div class="table-scroll-container">
+              <table id="tblInvoices" class="data-table">
+                <thead>
+                  <tr>
+                    <th width="40"><input type="checkbox" id="chkHeaderSelectAll" checked></th>
+                    <th>Ngày phát hành</th>
+                    <th>Biển số xe</th>
+                    <th>Số hóa đơn</th>
+                    <th>Loại giao dịch</th>
+                    <th class="text-right">Số tiền</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Invoices rows populated dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <div id="searchEmptyState" class="empty-state" style="display: block;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="empty-icon"><circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+          <h3>Chưa có dữ liệu</h3>
+          <p>Nhập khoảng ngày và click "Tìm kiếm hóa đơn" để hiển thị danh sách hóa đơn cần tải.</p>
+        </div>
+      </section>
+
+      <!-- SECTION 3: DOWNLOAD PROGRESS -->
+      <section id="secProgress" class="app-card progress-card" style="display: none;">
+        <div class="card-header text-center">
+          <h2>Đang tải hóa đơn PDF</h2>
+          <p>Vui lòng không tắt ứng dụng khi quá trình tải đang được thực hiện.</p>
+        </div>
+
+        <!-- PROGRESS BAR -->
+        <div class="progress-container">
+          <div class="progress-details">
+            <span id="lblProgressPercentage">0%</span>
+            <span id="lblProgressRatio">0 / 0 hóa đơn</span>
+          </div>
+          <div class="progress-bar-track">
+            <div id="progressBarFill" class="progress-bar-fill" style="width: 0%;"></div>
+          </div>
+          <p class="current-file-text" id="lblCurrentDownloadingFile">Đang khởi tạo...</p>
+        </div>
+
+        <!-- LIVE LOGS CONSOLE -->
+        <div class="console-box">
+          <div class="console-header">
+            <span>Nhật ký tải file</span>
+            <span class="status-indicator live">Đang ghi</span>
+          </div>
+          <div id="consoleLogs" class="console-body">
+            <!-- Dynamic logs -->
+          </div>
+        </div>
+
+        <!-- ACTION BUTTONS -->
+        <div class="action-buttons text-center">
+          <p class="text-muted"><small>Tải lần lượt từng hóa đơn để tránh bị chặn IP bởi máy chủ phát hành.</small></p>
+        </div>
+      </section>
+
+      <!-- SECTION 4: COMPLETED SUMMARY -->
+      <section id="secCompleted" class="app-card completed-card" style="display: none;">
+        <div class="success-header text-center">
+          <div class="success-icon-wrapper">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" class="success-icon">
+              <polyline points="20 6 9 17 4 12" />
+            </svg>
+          </div>
+          <h2>Tải hoàn tất!</h2>
+          <p>Tất cả hóa đơn đã chọn đã được tải xuống và xuất báo cáo CSV thành công.</p>
+        </div>
+
+        <div class="completed-summary-grid">
+          <div class="summary-box bg-green-opacity">
+            <span class="label">Thành công</span>
+            <span class="value text-green" id="lblSuccessCount">0</span>
+          </div>
+          <div class="summary-box bg-red-opacity">
+            <span class="label">Lỗi/Thất bại</span>
+            <span class="value text-red" id="lblFailedCount">0</span>
+          </div>
+        </div>
+
+        <div class="file-action-card">
+          <h4>Vị trí lưu trữ dữ liệu</h4>
+          <div class="file-path-display">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="path-icon"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+            <span id="lblSavedFolderLink" class="path-link">Chưa chọn thư mục</span>
+          </div>
+          <div class="file-path-display">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="path-icon"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            <span id="lblSavedCSVLink" class="path-link">Chưa tạo báo cáo</span>
+          </div>
+        </div>
+
+        <div class="action-buttons col-3">
+          <button type="button" id="btnOpenFolder" class="btn btn-secondary">
+            Mở thư mục lưu file
+          </button>
+          <button type="button" id="btnOpenCSV" class="btn btn-secondary">
+            Mở file Báo cáo CSV
+          </button>
+          <button type="button" id="btnBackToSearch" class="btn btn-primary">
+            Quay lại Tìm kiếm
+          </button>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="app-footer-brand">
+      <p>&copy; 2026 VETC Bulk Invoice PDF Downloader. Built with Premium Design Aesthetics.</p>
+    </footer>
+
+  </div>
+  <script src="renderer.js"></script>
+</body>
+</html>
